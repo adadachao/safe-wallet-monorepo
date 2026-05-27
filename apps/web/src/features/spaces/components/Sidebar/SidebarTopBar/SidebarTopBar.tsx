@@ -1,5 +1,4 @@
 import type { ReactElement } from 'react'
-import { useRouter } from 'next/router'
 import { SidebarTrigger, useSidebar } from '@/components/ui/sidebar'
 import { cn } from '@/utils/cn'
 import { AppRoutes } from '@/config/routes'
@@ -8,7 +7,6 @@ import SafeLogo from '@/components/common/SafeLogo'
 export const SidebarTopBar = (): ReactElement => {
   const { state } = useSidebar()
   const isCollapsed = state === 'collapsed'
-  const router = useRouter()
 
   const logoHref = AppRoutes.welcome.accounts
 

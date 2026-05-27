@@ -51,7 +51,6 @@ const Dashboard = (): ReactElement => {
   const hn = useLoadFeature(HypernativeFeature)
   const { NoFeeCampaignBanner, noFeeCampaignBannerID } = useLoadFeature(NoFeeCampaignFeature)
   const { NonPinnedWarning } = useLoadFeature(MyAccountsFeature)
-  const showSafeApps = useHasFeature(FEATURES.SAFE_APPS)
   const supportsRecovery = useIsRecoverySupported()
 
   const { balances, loaded: balancesLoaded } = useVisibleBalances()
