@@ -7,14 +7,14 @@ import { AppRoutes } from '@/config/routes'
 import { HeaderNavigation } from '@/features/spaces/components/HeaderNavigation'
 import { useLoadFeature } from '@/features/__core__'
 import { WalletFeature, useWalletPopover } from '@/features/wallet'
-import { GlobalSearchFeature } from '@/features/global-search'
+// import { GlobalSearchFeature } from '@/features/global-search'
 import { WalletConnectFeature } from '@/features/walletconnect'
 import { useDraftBatch } from '@/features/batching'
 import { useMediaQuery } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { useAppDispatch, useAppSelector } from '@/store'
+import { useAppSelector } from '@/store'
 import { selectNotifications } from '@/store/notificationsSlice'
-import { openGlobalSearch } from '@/features/global-search/store/globalSearchSlice'
+// import { openGlobalSearch } from '@/features/global-search/store/globalSearchSlice'
 import useSafeAddress from '@/hooks/useSafeAddress'
 import { useSafeAddressFromUrl } from '@/hooks/useSafeAddressFromUrl'
 import useIsSafeOwner from '@/hooks/useIsSafeOwner'
@@ -38,7 +38,7 @@ interface TopbarProps {
 }
 
 const Topbar = ({ onMenuToggle, onBatchToggle }: TopbarProps): ReactElement => {
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   const { breakpoints } = useTheme()
   // Below `md` the sidebar is closed and rendered as an overlay,
   // so the burger needs to appear on the same range to keep it reachable.
@@ -51,14 +51,14 @@ const Topbar = ({ onMenuToggle, onBatchToggle }: TopbarProps): ReactElement => {
     handleClose: handleWalletClose,
   } = useWalletPopover()
   const { WalletPopover } = useLoadFeature(WalletFeature)
-  const { GlobalSearchModal, GlobalSearchInput } = useLoadFeature(GlobalSearchFeature)
+  // const { GlobalSearchModal, GlobalSearchInput } = useLoadFeature(GlobalSearchFeature)
   const { WalletConnectWidget } = useLoadFeature(WalletConnectFeature)
   const notificationsRef = useRef<NotificationsPopoverRef>(null)
   const notifications = useAppSelector(selectNotifications)
   const spaceId = useCurrentSpaceId()
   const isSpaceRoute = useIsSpaceRoute()
   const pathname = usePathname()
-  const isWelcomeListRoute = pathname === AppRoutes.welcome.accounts || pathname === AppRoutes.welcome.spaces
+  // const isWelcomeListRoute = pathname === AppRoutes.welcome.accounts || pathname === AppRoutes.welcome.spaces
   const urlSafeAddress = useSafeAddressFromUrl()
   const isSettingsWithoutSafe = pathname?.startsWith(AppRoutes.settings.index) === true && !urlSafeAddress
   const safeAddress = useSafeAddress()
@@ -112,9 +112,8 @@ const Topbar = ({ onMenuToggle, onBatchToggle }: TopbarProps): ReactElement => {
             <SafeLogo />
           ) : showSpaceSafeBar ? (
             <SpaceSafeBar />
-          ) : (
-            <GlobalSearchInput className="w-64 md:w-80" />
-          )}
+          ) : // <GlobalSearchInput className="w-64 md:w-80" />
+          null}
         </div>
 
         {/* Right content: navigation buttons — wraps to next row when viewport is narrow */}
@@ -133,8 +132,8 @@ const Topbar = ({ onMenuToggle, onBatchToggle }: TopbarProps): ReactElement => {
             walletLabel={wallet?.label}
             walletOpen={walletOpen}
             messages={unreadCount}
-            showSearch={!isSpaceRoute && !isWelcomeListRoute}
-            onSearchClick={() => dispatch(openGlobalSearch())}
+            // showSearch={!isSpaceRoute && !isWelcomeListRoute}
+            // onSearchClick={() => dispatch(openGlobalSearch())}
             onNotificationsClick={(e) => notificationsRef.current?.handleClick(e)}
             onWalletClick={handleWalletClick}
             walletConnectSlot={<WalletConnectWidget />}
@@ -145,7 +144,7 @@ const Topbar = ({ onMenuToggle, onBatchToggle }: TopbarProps): ReactElement => {
         </div>
       </header>
 
-      <GlobalSearchModal />
+      {/* <GlobalSearchModal /> */}
 
       <NotificationsPopover ref={notificationsRef} />
 

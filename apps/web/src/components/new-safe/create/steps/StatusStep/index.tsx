@@ -62,11 +62,7 @@ export const CreateSafeStatus = ({
   useEffect(() => {
     if (!setProgressColor) return
 
-    if (isError) {
-      setProgressColor(lightPalette.error.main)
-    } else {
-      setProgressColor(lightPalette.secondary.main)
-    }
+    setProgressColor(isError ? lightPalette.error.main : undefined)
   }, [isError, setProgressColor])
 
   const tryAgain = () => {
@@ -77,7 +73,7 @@ export const CreateSafeStatus = ({
       return
     }
 
-    setProgressColor?.(lightPalette.secondary.main)
+    setProgressColor?.(undefined)
     setStep(2)
     setStepData?.({
       owners: pendingSafe.props.safeAccountConfig.owners.map((owner) => ({ name: '', address: owner })),

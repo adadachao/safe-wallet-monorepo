@@ -25,7 +25,7 @@ const SignInOptions = ({ afterSignIn, redirectLoading = false }: SignInOptionsPr
       <SignInButton
         afterSignIn={afterSignIn}
         redirectLoading={redirectLoading}
-        buttonStyle="walletBtnSecondary"
+        buttonStyle="walletBtnPrimary"
         buttonText={{ connected: 'Continue with', disconnected: 'Continue with wallet' }}
       />
     </Box>

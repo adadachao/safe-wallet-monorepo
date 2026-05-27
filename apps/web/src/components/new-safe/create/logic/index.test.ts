@@ -19,6 +19,7 @@ import {
 } from '@safe-global/safe-deployments'
 import { Safe_to_l2_setup__factory } from '@safe-global/utils/types/contracts'
 import { FEATURES, getLatestSafeVersion } from '@safe-global/utils/utils/chains'
+import { CHAIN_CONTRACT_ADDRESS_OVERRIDES } from '@/config/chainContractOverrides'
 import type { SingletonDeploymentV2 } from '@safe-global/safe-deployments'
 import { http, HttpResponse } from 'msw'
 import { server } from '@/tests/server'
@@ -161,6 +162,20 @@ describe('create/logic', () => {
   })
 
   describe('createNewUndeployedSafeWithoutSalt', () => {
+    it('should use Mars contract addresses from config overrides', () => {
+      const mars = CHAIN_CONTRACT_ADDRESS_OVERRIDES['10323']
+
+      const result = createNewUndeployedSafeWithoutSalt(
+        '1.3.0',
+        { owners: [faker.finance.ethereumAddress()], threshold: 1 },
+        chainBuilder().with({ chainId: '10323', l2: true, recommendedMasterCopyVersion: '1.3.0' }).build(),
+      )
+
+      expect(result.factoryAddress).toBe(mars.safeProxyFactoryAddress)
+      expect(result.masterCopy).toBe(mars.safeSingletonAddress)
+      expect(result.safeAccountConfig.fallbackHandler).toBe(mars.fallbackHandlerAddress)
+    })
+
     it('should resolve addresses chain-agnostically for unregistered chains', () => {
       const result = createNewUndeployedSafeWithoutSalt(
         '1.4.1',

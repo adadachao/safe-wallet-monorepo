@@ -20,6 +20,10 @@ import {
   resolveChainAgnosticContractAddresses,
 } from '@safe-global/utils/services/contracts/deployments'
 import { logError, Errors } from '@/services/exceptions'
+import { getContractNetworksFromChain } from '@safe-global/utils/services/contracts/chainContractAddresses'
+import { CHAIN_CONTRACT_ADDRESS_OVERRIDES } from '@/config/chainContractOverrides'
+import { getChainContractAddressesForChain } from '@/utils/chainConfig'
+import type { Chain } from '@safe-global/store/gateway/AUTO_GENERATED/chains'
 
 export const initSafeSDK = async ({
   provider,
@@ -40,6 +44,18 @@ export const initSafeSDK = async ({
   let safeVersion = version ?? (await Gnosis_safe__factory.connect(address, provider).VERSION())
   let isL1SafeSingleton = chainId === chains.eth
   let contractNetworks: ContractNetworksConfig | undefined
+
+  const chainForContracts = { chainId } as Chain
+  const configuredNetworks = getContractNetworksFromChain(
+    { chainId, contractAddresses: getChainContractAddressesForChain(chainForContracts) },
+    CHAIN_CONTRACT_ADDRESS_OVERRIDES,
+  )
+  if (configuredNetworks) {
+    contractNetworks = configuredNetworks
+    if (isL2Chain !== undefined) {
+      isL1SafeSingleton = !isL2Chain
+    }
+  }
 
   // For versions >= 1.4.1, resolve all addresses chain-agnostically (works on any chain).
   // Derive deployment type AND L1/L2 flavour from the master copy so that Safes on

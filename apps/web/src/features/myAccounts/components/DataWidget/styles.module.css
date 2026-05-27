@@ -22,3 +22,17 @@
   margin: 4px;
   color: var(--color-text-secondary);
 }
+
+.importButton {
+  border-color: var(--color-primary-main) !important;
+  color: var(--color-primary-main) !important;
+}
+
+.importButton:hover {
+  border-color: var(--color-primary-dark) !important;
+  background-color: var(--color-background-light) !important;
+}
+
+.importButton :global(.MuiSvgIcon-root) {
+  color: var(--color-primary-main);
+}

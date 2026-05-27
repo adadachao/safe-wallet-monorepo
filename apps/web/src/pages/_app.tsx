@@ -42,6 +42,7 @@ import { useNotificationTracking } from '@/components/settings/PushNotifications
 import WalletProvider from '@/components/common/WalletProvider'
 import { CounterfactualFeature } from '@/features/counterfactual'
 import useCounterfactualSafeSync from '@/features/counterfactual/hooks/useCounterfactualSafeSync'
+import SafeCreationMonitorLoader from '@/components/new-safe/create/SafeCreationMonitorLoader'
 import { RecoveryFeature } from '@/features/recovery'
 import { SpendingLimitsFeature } from '@/features/spending-limits'
 import { useLoadFeature } from '@/features/__core__'
@@ -225,6 +226,8 @@ const SafeWalletApp = ({
               <Notifications />
 
               <RecoveryLoader />
+
+              <SafeCreationMonitorLoader />
 
               <CounterfactualHooksLoader />
 

@@ -29,6 +29,10 @@
   padding: var(--space-3) 52px;
 }
 
+.progress {
+  color: var(--color-primary-main);
+}
+
 .progress :global .MuiLinearProgress-root::before {
   display: none;
 }

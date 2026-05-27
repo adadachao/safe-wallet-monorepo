@@ -126,7 +126,7 @@ const SpacesList = () => {
   }, [setHasSignedIn])
 
   return (
-    <Box className={css.container}>
+    <Box className={`shadcn-scope ${css.container}`}>
       <Box className={css.mySpaces}>
         <Box className={css.spacesHeader}>
           <AccountsNavigation />

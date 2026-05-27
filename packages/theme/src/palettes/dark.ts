@@ -1,31 +1,31 @@
 import type { ColorPalette } from './types'
 
 /**
- * Unified dark mode color palette.
- * Merged from web and mobile palettes with mobile's extended colors as the base.
+ * Unified dark mode color palette — MOVA brand.
+ * Accent: #c1ff72, backgrounds: #000000 / #14170d / #1c1c1c.
  */
 const darkPalette: ColorPalette = {
   text: {
     primary: '#FFFFFF',
-    secondary: '#636669',
+    secondary: '#A1A3A7',
     disabled: 'rgba(255, 255, 255, 0.3)',
     contrast: '#000000',
   },
   primary: {
-    dark: '#0cb259',
-    main: '#12FF80',
-    light: '#A1A3A7',
+    dark: '#9ed14a',
+    main: '#c1ff72',
+    light: '#d4ff9e',
   },
   secondary: {
     dark: '#636669',
     main: '#FFFFFF',
-    light: '#B0FFC9',
-    background: '#1B2A22',
+    light: '#e0ffba',
+    background: '#14170d',
   },
   border: {
     main: '#636669',
     light: '#303033',
-    background: '#121312',
+    background: '#000000',
   },
   error: {
     dark: '#FFE0E6',
@@ -44,10 +44,10 @@ const darkPalette: ColorPalette = {
     background: '#173026',
   },
   info: {
-    dark: '#D9F4FB',
-    main: '#00BFE5',
-    light: '#458898',
-    background: '#203339',
+    dark: '#9ed14a',
+    main: '#c1ff72',
+    light: '#d4ff9e',
+    background: '#14170d',
   },
   warning: {
     dark: '#FFE4CB',
@@ -61,11 +61,11 @@ const darkPalette: ColorPalette = {
     contrastText: '#FF8C00',
   },
   background: {
-    default: '#121312',
-    main: '#121312',
-    sheet: '#121312',
+    default: '#000000',
+    main: '#000000',
+    sheet: '#000000',
     paper: '#1C1C1C',
-    light: '#1B2A22',
+    light: '#14170d',
     secondary: '#303033',
     skeleton: 'rgba(255, 255, 255, 0.04)',
     disabled: '#7878801F',
@@ -75,14 +75,14 @@ const darkPalette: ColorPalette = {
   },
   logo: {
     main: '#FFFFFF',
-    background: '#303033',
+    background: '#1C1C1C',
   },
   static: {
-    main: '#121312',
+    main: '#000000',
     light: '#636669',
     primary: '#FFFFFF',
     textSecondary: '#A1A3A7',
-    textBrand: '#12FF80',
+    textBrand: '#c1ff72',
   },
 }
 

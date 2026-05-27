@@ -3,7 +3,14 @@ import Link from 'next/link'
 import { AppRoutes } from '@/config/routes'
 import { cn } from '@/utils/cn'
 
-const buttonSx = { width: ['100%', 'auto'], height: '36px', px: 2 }
+const buttonSx = {
+  width: ['100%', 'auto'],
+  height: '36px',
+  px: 2,
+  bgcolor: 'primary.main',
+  color: '#000',
+  '&:hover': { bgcolor: 'primary.dark' },
+}
 
 const CreateButton = ({ isPrimary, className }: { isPrimary: boolean; className?: string }) => {
   return (

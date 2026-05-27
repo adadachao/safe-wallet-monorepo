@@ -85,7 +85,7 @@ export function createAppKitInstance(networks: [Network, ...Network[]], defaultN
       '15c8b91ade1a4e58f3ce4e7a0dd7f42b47db0c8df7e0d84f63eb39bcb96c4e0f', // Bybit Wallet
     ],
     themeVariables: {
-      accent: '#12FF80',
+      accent: '#c1ff72',
     },
     // Reown SDK fires telemetry to api.web3modal.org when this is undefined.
     // We have our own opt-in analytics; never send data to Reown.

@@ -1,21 +1,14 @@
 import CounterfactualSuccessScreen from '../CounterfactualSuccessScreen'
-import LazyCounterfactual from '../LazyCounterfactual'
 
 /**
  * Global hooks component for counterfactual feature.
  *
- * This component is loaded via useLoadFeature() in _app.tsx, ensuring
- * the entire counterfactual feature is bundled as a single chunk.
- * No need for internal dynamic imports since all components are
- * already in the same feature chunk.
+ * Safe creation monitoring (LazyCounterfactual) is mounted unconditionally via
+ * SafeCreationMonitorLoader in _app.tsx so direct deploy works on chains
+ * without FEATURES.COUNTERFACTUAL (e.g. custom Mars).
  */
 function CounterfactualHooks() {
-  return (
-    <>
-      <CounterfactualSuccessScreen />
-      <LazyCounterfactual />
-    </>
-  )
+  return <CounterfactualSuccessScreen />
 }
 
 export default CounterfactualHooks

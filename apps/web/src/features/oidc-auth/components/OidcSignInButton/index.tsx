@@ -6,7 +6,7 @@ import { useHasFeature } from '@/hooks/useChains'
 import { FEATURES } from '@safe-global/utils/utils/chains'
 import { useOidcLogin } from '../../hooks/useOidcLogin'
 import type { OidcConnection } from '../../constants'
-import css from './styles.module.css'
+import authCss from '@/components/common/AuthButton/styles.module.css'
 
 interface OidcSignInButtonProps {
   connection: OidcConnection
@@ -29,7 +29,7 @@ const OidcSignInButton = ({ connection, label, icon, analyticsEvent, testId }: O
 
   return (
     <Button
-      className={css.signInButton}
+      className={authCss.authBtnPrimary}
       fullWidth
       disableElevation
       startIcon={icon}

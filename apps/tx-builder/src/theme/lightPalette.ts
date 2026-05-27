@@ -5,15 +5,15 @@ const lightPalette = {
     disabled: '#DDDEE0',
   },
   primary: {
-    dark: '#3c3c3c',
-    main: '#121312',
-    light: '#636669',
+    dark: '#26a300',
+    main: '#2fcc00',
+    light: '#5fdb33',
   },
   secondary: {
-    dark: '#0FDA6D',
-    main: '#12FF80',
-    light: '#B0FFC9',
-    background: '#EFFFF4',
+    dark: '#26a300',
+    main: '#121312',
+    light: '#b8f0a0',
+    background: '#e8f9e0',
   },
   border: {
     main: '#A1A3A7',
@@ -58,7 +58,7 @@ const lightPalette = {
     background: '#EEEFF0',
   },
   upload: {
-    primary: '#12FF80',
+    primary: '#2fcc00',
   },
   static: {
     main: '#121312',

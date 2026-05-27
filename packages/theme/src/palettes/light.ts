@@ -1,8 +1,8 @@
 import type { ColorPalette } from './types'
 
 /**
- * Unified light mode color palette.
- * Merged from web and mobile palettes with mobile's extended colors as the base.
+ * Unified light mode color palette — MOVA brand on light surfaces.
+ * Content accent: #2fcc00; backgrounds: #f4f4f4 / #ffffff.
  */
 const lightPalette: ColorPalette = {
   text: {
@@ -12,15 +12,15 @@ const lightPalette: ColorPalette = {
     contrast: '#FFFFFF',
   },
   primary: {
-    dark: '#3c3c3c',
-    main: '#121312',
-    light: '#636669',
+    dark: '#26a300',
+    main: '#2fcc00',
+    light: '#5fdb33',
   },
   secondary: {
-    dark: '#0FDA6D',
-    main: '#12FF80',
-    light: '#B0FFC9',
-    background: '#EFFFF4',
+    dark: '#26a300',
+    main: '#121312',
+    light: '#b8f0a0',
+    background: '#e8f9e0',
   },
   border: {
     main: '#A1A3A7',
@@ -44,10 +44,10 @@ const lightPalette: ColorPalette = {
     background: '#CBF2DB',
   },
   info: {
-    dark: '#15566A',
-    main: '#00BFE5',
-    light: '#78D2E7',
-    background: '#CEF0FD',
+    dark: '#26a300',
+    main: '#2fcc00',
+    light: '#5fdb33',
+    background: '#e8f9e0',
   },
   warning: {
     dark: '#6C2D19',
@@ -61,11 +61,11 @@ const lightPalette: ColorPalette = {
     contrastText: '#FF8C00',
   },
   background: {
-    default: '#FFFFFF',
+    default: '#F4F4F4',
     main: '#F4F4F4',
     sheet: '#F4F4F4',
     paper: '#FFFFFF',
-    light: '#EFFFF4',
+    light: '#e8f9e0',
     secondary: '#DDDEE0',
     skeleton: 'rgba(0, 0, 0, 0.04)',
     disabled: '#7878801F',
@@ -82,7 +82,7 @@ const lightPalette: ColorPalette = {
     light: '#636669',
     primary: '#FFFFFF',
     textSecondary: '#A1A3A7',
-    textBrand: '#12FF80',
+    textBrand: '#2fcc00',
   },
 }
 

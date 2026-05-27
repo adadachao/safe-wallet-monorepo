@@ -39,7 +39,7 @@ const WelcomeLogin = () => {
               onContinue={performAuth}
               fullWidth
               isLoading={loading}
-              buttonStyle="walletBtnStatic"
+              buttonStyle="walletBtnPrimary"
             />
           </Track>
         </Box>

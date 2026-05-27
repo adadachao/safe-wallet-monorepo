@@ -1,0 +1,13 @@
+{
+  "10323": {
+    "safeSingletonAddress": "0x11bc461e1C612A09fb5a4F59aa05740aF1146c13",
+    "safeProxyFactoryAddress": "0x432d79e9F83763cb09902a287332d2A91A5892eE",
+    "multiSendAddress": "0x52B75B1EbB3a950AA7d8a6Fc82628036334eBA36",
+    "multiSendCallOnlyAddress": "0x8E7B7c74542c218C5d0f246101aa2f1547F65749",
+    "fallbackHandlerAddress": "0xEdd7Bb202D174B0ec77e55Dc7e783b68465Bb00b",
+    "signMessageLibAddress": "0x071605A9130C82B8178385Cc150EC1395B5DF4D7",
+    "createCallAddress": "0x86933940Ec074C6259AF3BD4c1ad08De93F0Cb98",
+    "simulateTxAccessorAddress": "0x7B49Ed7cfA543d0Cc5e2d13eFA34d3C4242564f5",
+    "safeWebAuthnSignerFactoryAddress": null
+  }
+}

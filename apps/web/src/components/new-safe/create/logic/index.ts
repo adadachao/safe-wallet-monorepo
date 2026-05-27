@@ -28,6 +28,12 @@ import type { ReplayedSafeProps, UndeployedSafeProps } from '@safe-global/utils/
 import { isPredictedSafeProps } from '@/features/counterfactual/services'
 import { getSafeContractDeployment, getChainAgnosticAddress } from '@safe-global/utils/services/contracts/deployments'
 import {
+  getContractNetworksFromChain,
+  hasSafeCreationContractAddresses,
+} from '@safe-global/utils/services/contracts/chainContractAddresses'
+import { CHAIN_CONTRACT_ADDRESS_OVERRIDES } from '@/config/chainContractOverrides'
+import { getChainContractAddressesForChain } from '@/utils/chainConfig'
+import {
   Safe__factory,
   Safe_proxy_factory__factory,
   Safe_to_l2_setup__factory,
@@ -66,10 +72,15 @@ export const createNewSafe = async (
 ): Promise<void> => {
   let txResponse: TransactionResponse
   if (isPredictedSafeProps(undeployedSafeProps)) {
+    const contractNetworks = getContractNetworksFromChain(
+      { chainId: chain.chainId, contractAddresses: getChainContractAddressesForChain(chain) },
+      CHAIN_CONTRACT_ADDRESS_OVERRIDES,
+    )
     const safe = await Safe.init({
       predictedSafe: undeployedSafeProps,
       provider,
       isL1SafeSingleton,
+      ...(contractNetworks ? { contractNetworks } : {}),
     })
 
     const creationTx = await safe.createSafeDeploymentTransaction()
@@ -99,11 +110,17 @@ export const computeNewSafeAddress = async (
 ): Promise<string> => {
   const safeProvider = new SafeProvider({ provider })
 
+  const contractNetworks = getContractNetworksFromChain(
+    { chainId: chain.chainId, contractAddresses: getChainContractAddressesForChain(chain) },
+    CHAIN_CONTRACT_ADDRESS_OVERRIDES,
+  )
+
   return predictSafeAddress({
     safeProvider,
     chainId: BigInt(chain.chainId),
     safeAccountConfig: props.safeAccountConfig,
     safeDeploymentConfig: props.safeDeploymentConfig,
+    ...(contractNetworks ? { contractNetworks } : {}),
   })
 }
 
@@ -141,7 +158,11 @@ export const estimateSafeCreationGas = async (
   undeployedSafe: UndeployedSafeProps,
   safeVersion?: SafeVersion,
 ): Promise<bigint> => {
-  const readOnlyProxyFactoryContract = await getReadOnlyProxyFactoryContract(safeVersion ?? getLatestSafeVersion(chain))
+  const replayedSafeProps = assertNewUndeployedSafeProps(undeployedSafe, chain)
+  const readOnlyProxyFactoryContract = await getReadOnlyProxyFactoryContract(
+    safeVersion ?? getLatestSafeVersion(chain),
+    replayedSafeProps.factoryAddress,
+  )
   const encodedSafeCreationTx = encodeSafeCreationTx(undeployedSafe, chain)
 
   const gas = await provider.estimateGas({
@@ -255,24 +276,39 @@ export const createNewUndeployedSafeWithoutSalt = (
   },
   chain: Chain,
 ): UndeployedSafeWithoutSalt => {
-  // Resolve contract addresses (per-chain for registered chains, chain-agnostic fallback for new chains)
-  const deploymentType = chain.zk ? 'zksync' : 'canonical'
+  const chainContractAddresses = getChainContractAddressesForChain(chain)
 
-  const fallbackHandlerDeployments = getCompatibilityFallbackHandlerDeployments({ version: safeVersion })
-  const fallbackHandlerAddress = getChainAgnosticAddress(fallbackHandlerDeployments, chain.chainId, deploymentType)
+  let safeL2Address: string | undefined
+  let safeL1Address: string | undefined
+  let safeFactoryAddress: string | undefined
+  let fallbackHandlerAddress: string | undefined
 
-  const safeL2Deployments = getSafeL2SingletonDeployments({ version: safeVersion })
-  const safeL2Address = getChainAgnosticAddress(safeL2Deployments, chain.chainId, deploymentType)
+  if (hasSafeCreationContractAddresses(chainContractAddresses)) {
+    safeFactoryAddress = chainContractAddresses.safeProxyFactoryAddress
+    fallbackHandlerAddress = chainContractAddresses.fallbackHandlerAddress
+    safeL2Address = chainContractAddresses.safeSingletonAddress
+    safeL1Address = chainContractAddresses.safeSingletonAddress
+  } else {
+    const deploymentType = chain.zk ? 'zksync' : 'canonical'
 
-  const safeL1Deployments = getSafeSingletonDeployments({ version: safeVersion })
-  const safeL1Address = getChainAgnosticAddress(safeL1Deployments, chain.chainId, deploymentType)
+    const fallbackHandlerDeployments = getCompatibilityFallbackHandlerDeployments({ version: safeVersion })
+    fallbackHandlerAddress = getChainAgnosticAddress(fallbackHandlerDeployments, chain.chainId, deploymentType)
 
-  const safeFactoryDeployments = getProxyFactoryDeployments({ version: safeVersion })
-  const safeFactoryAddress = getChainAgnosticAddress(safeFactoryDeployments, chain.chainId, deploymentType)
+    const safeL2Deployments = getSafeL2SingletonDeployments({ version: safeVersion })
+    safeL2Address = getChainAgnosticAddress(safeL2Deployments, chain.chainId, deploymentType)
+
+    const safeL1Deployments = getSafeSingletonDeployments({ version: safeVersion })
+    safeL1Address = getChainAgnosticAddress(safeL1Deployments, chain.chainId, deploymentType)
+
+    const safeFactoryDeployments = getProxyFactoryDeployments({ version: safeVersion })
+    safeFactoryAddress = getChainAgnosticAddress(safeFactoryDeployments, chain.chainId, deploymentType)
+  }
 
   if (!safeL2Address || !safeL1Address || !safeFactoryAddress || !fallbackHandlerAddress) {
     throw new Error('No Safe deployment found')
   }
+
+  const deploymentType = chain.zk ? 'zksync' : 'canonical'
 
   const safeToL2SetupDeployments = getSafeToL2SetupDeployments({ version: '1.4.1' })
   const safeToL2SetupAddress = getChainAgnosticAddress(safeToL2SetupDeployments, chain.chainId, deploymentType)
@@ -315,17 +351,29 @@ export const migrateLegacySafeProps = (predictedSafeProps: PredictedSafeProps, c
     throw new Error('Undeployed Safe with incomplete data.')
   }
 
-  const fallbackHandlerDeployment = getCompatibilityFallbackHandlerDeployment({
-    version: safeVersion,
-    network: chainId,
-  })
-  const fallbackHandlerAddress = fallbackHandlerDeployment?.defaultAddress
+  const chainContractAddresses = getChainContractAddressesForChain(chain)
 
-  const masterCopyDeployment = getSafeContractDeployment(chain, safeVersion)
-  const masterCopyAddress = masterCopyDeployment?.defaultAddress
+  let fallbackHandlerAddress: string | undefined
+  let masterCopyAddress: string | undefined
+  let safeFactoryAddress: string | undefined
 
-  const safeFactoryDeployment = getProxyFactoryDeployment({ version: safeVersion, network: chainId })
-  const safeFactoryAddress = safeFactoryDeployment?.defaultAddress
+  if (hasSafeCreationContractAddresses(chainContractAddresses)) {
+    fallbackHandlerAddress = chainContractAddresses.fallbackHandlerAddress
+    masterCopyAddress = chainContractAddresses.safeSingletonAddress
+    safeFactoryAddress = chainContractAddresses.safeProxyFactoryAddress
+  } else {
+    const fallbackHandlerDeployment = getCompatibilityFallbackHandlerDeployment({
+      version: safeVersion,
+      network: chainId,
+    })
+    fallbackHandlerAddress = fallbackHandlerDeployment?.defaultAddress
+
+    const masterCopyDeployment = getSafeContractDeployment(chain, safeVersion)
+    masterCopyAddress = masterCopyDeployment?.defaultAddress
+
+    const safeFactoryDeployment = getProxyFactoryDeployment({ version: safeVersion, network: chainId })
+    safeFactoryAddress = safeFactoryDeployment?.defaultAddress
+  }
 
   if (!masterCopyAddress || !safeFactoryAddress || !fallbackHandlerAddress) {
     throw new Error('No Safe deployment found')

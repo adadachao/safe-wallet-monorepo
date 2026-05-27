@@ -1,6 +1,6 @@
 import type { MouseEvent, ReactNode } from 'react'
 import { useMemo } from 'react'
-import { Search, Bell, Wallet, Layers, ChevronUp, ChevronDown } from 'lucide-react'
+import { Bell, Wallet, Layers, ChevronUp, ChevronDown } from 'lucide-react'
 import { blo } from 'blo'
 import { isAddress } from 'ethers'
 import { Button } from '@/components/ui/button'
@@ -76,8 +76,8 @@ export function HeaderNavigation({
   walletLabel,
   walletOpen = false,
   messages = 0,
-  showSearch = false,
-  onSearchClick,
+  // showSearch = false,
+  // onSearchClick,
   onNotificationsClick,
   onWalletClick,
   walletConnectSlot,
@@ -109,7 +109,7 @@ export function HeaderNavigation({
   return (
     <div className={cn('flex items-center gap-1')}>
       {/* TODO: Global search button */}
-      {showSearch && (
+      {/* {showSearch && (
         <div className="flex self-stretch items-stretch rounded-lg bg-card shadow-[0px_4px_20px_0px_rgba(0,0,0,0.03)]">
           <Button
             variant="ghost"
@@ -121,7 +121,7 @@ export function HeaderNavigation({
             <Search className="size-5 text-muted-foreground" />
           </Button>
         </div>
-      )}
+      )} */}
 
       <div
         className="relative flex self-stretch items-stretch rounded-lg bg-card shadow-[0px_4px_20px_0px_rgba(0,0,0,0.03)]"

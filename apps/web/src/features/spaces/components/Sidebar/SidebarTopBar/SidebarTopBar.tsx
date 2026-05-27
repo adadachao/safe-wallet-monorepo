@@ -10,7 +10,7 @@ export const SidebarTopBar = (): ReactElement => {
   const isCollapsed = state === 'collapsed'
   const router = useRouter()
 
-  const logoHref = router.pathname === AppRoutes.welcome.accounts ? AppRoutes.welcome.index : AppRoutes.welcome.accounts
+  const logoHref = AppRoutes.welcome.accounts
 
   return (
     <div

@@ -5,10 +5,15 @@ import EthHashInfo from '@/components/common/EthHashInfo'
 import WalletIcon from '@/components/common/WalletIcon'
 import { useEffect, useState } from 'react'
 import { WalletMinimal } from 'lucide-react'
-import css from './styles.module.css'
+import authCss from '@/components/common/AuthButton/styles.module.css'
 
-// 'walletBtnStatic' is intentionally theme-agnostic — used on the welcome page which has a fixed white background
 export type WalletLoginButtonStyle = 'walletBtnPrimary' | 'walletBtnSecondary' | 'walletBtnStatic'
+
+const walletButtonClassMap: Record<WalletLoginButtonStyle, string> = {
+  walletBtnPrimary: authCss.authBtnPrimary,
+  walletBtnSecondary: authCss.authBtnPrimary,
+  walletBtnStatic: authCss.authBtnPrimary,
+}
 
 export interface WalletLoginButtonText {
   connected?: string
@@ -56,13 +61,13 @@ const WalletLogin = ({
         size="xlarge"
         onClick={onContinue}
         fullWidth={fullWidth}
-        className={css[buttonStyle]}
+        className={walletButtonClassMap[buttonStyle]}
         data-testid="continue-with-wallet-btn"
         disabled={isLoading}
         disableElevation
       >
         {isLoading ? (
-          <CircularProgress size={20} sx={{ color: '#fff' }} />
+          <CircularProgress size={20} sx={{ color: '#000' }} />
         ) : (
           <Box justifyContent="space-between" display="flex" flexDirection="row" alignItems="center" gap={1}>
             <Box display="flex" flexDirection="column" alignItems="flex-start">
@@ -89,7 +94,7 @@ const WalletLogin = ({
   return (
     <Button
       onClick={onConnectWallet}
-      className={css[buttonStyle]}
+      className={walletButtonClassMap[buttonStyle]}
       variant="contained"
       size="small"
       disableElevation

@@ -9,7 +9,7 @@
 
 .dark .card {
   background: linear-gradient(90deg, rgba(176, 255, 201, 0.05) 0%, rgba(215, 246, 255, 0.05) 99.5%);
-  border: linear-gradient(225deg, #5fddff 12.5%, #12ff80 88.07%);
+  border: linear-gradient(225deg, var(--color-primary-main) 12.5%, #c1ff72 88.07%);
 }
 
 .cardContent {

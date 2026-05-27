@@ -23,7 +23,7 @@ const MyAccountsV2 = ({ safes, onLinkClick, isSidebar = false }: MyAccountsProps
   useTrackSafesCount(safes, wallet)
 
   return (
-    <div data-testid="sidebar-safe-container" className={css.container}>
+    <div data-testid="sidebar-safe-container" className={`shadcn-scope ${css.container}`}>
       <div className={classNames(css.myAccounts, { [css.sidebarAccounts]: isSidebar })}>
         <AccountsHeader isSidebar={isSidebar} onLinkClick={onLinkClick} />
 

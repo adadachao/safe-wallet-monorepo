@@ -1,17 +1,25 @@
+import { useEffect } from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import NewSafe from '@/components/welcome/NewSafe'
+import { useRouter } from 'next/router'
+import { AppRoutes } from '@/config/routes'
 import { BRAND_NAME } from '@/config/constants'
 
 const Welcome: NextPage = () => {
-  return (
-    <>
-      <Head>
-        <title>{`${BRAND_NAME} – Welcome`}</title>
-      </Head>
+  const router = useRouter()
 
-      <NewSafe />
-    </>
+  useEffect(() => {
+    if (!router.isReady) {
+      return
+    }
+
+    router.replace({ pathname: AppRoutes.welcome.accounts, query: router.query })
+  }, [router])
+
+  return (
+    <Head>
+      <title>{`${BRAND_NAME} – Welcome`}</title>
+    </Head>
   )
 }
 

@@ -1,5 +1,5 @@
 import { useCallback, useState, type ReactElement } from 'react'
-import { Box, Divider, Drawer } from '@mui/material'
+import { Box, Drawer } from '@mui/material'
 import ChevronRight from '@mui/icons-material/ChevronRight'
 
 import ChainIndicator from '@/components/common/ChainIndicator'
@@ -51,7 +51,7 @@ const Sidebar = (): ReactElement => {
           }}
         />
 
-        <Divider flexItem sx={{ borderColor: 'background.main' }} />
+        {/* <Divider flexItem sx={{ borderColor: 'background.main' }} /> */}
 
         <SidebarFooter />
       </div>

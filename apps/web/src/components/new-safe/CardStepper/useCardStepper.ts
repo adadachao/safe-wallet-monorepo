@@ -7,7 +7,7 @@ export type StepRenderProps<TData> = {
   onSubmit: (data: Partial<TData>) => void
   onBack: (data?: Partial<TData>) => void
   setStep: (step: number) => void
-  setProgressColor?: Dispatch<SetStateAction<string>>
+  setProgressColor?: Dispatch<SetStateAction<string | undefined>>
   setStepData?: Dispatch<SetStateAction<TData>>
 }
 

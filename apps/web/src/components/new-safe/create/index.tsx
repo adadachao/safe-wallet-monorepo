@@ -178,7 +178,7 @@ const CreateSafe = () => {
   }
 
   const onClose = () => {
-    router.push(AppRoutes.welcome.index)
+    router.push(AppRoutes.welcome.accounts)
   }
 
   return (

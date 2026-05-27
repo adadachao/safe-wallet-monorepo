@@ -6,7 +6,7 @@ import { Stack } from '@mui/material'
 import PendingTxsList from '@/components/dashboard/PendingTxs/PendingTxsList'
 import AssetsWidget from '@/components/dashboard/Assets'
 import Overview from '@/components/dashboard/Overview/Overview'
-import ExplorePossibleWidget from '@/components/dashboard/ExplorePossibleWidget'
+// import ExplorePossibleWidget from '@/components/dashboard/ExplorePossibleWidget'
 import { useIsRecoverySupported } from '@/features/recovery/hooks/useIsRecoverySupported'
 import { useHasFeature } from '@/hooks/useChains'
 import css from './styles.module.css'
@@ -117,7 +117,7 @@ const Dashboard = (): ReactElement => {
                 </div>
               )}
 
-              {showSafeApps && <ExplorePossibleWidget />}
+              {/* {showSafeApps && <ExplorePossibleWidget />} */}
 
               <NewsDisclaimers />
             </>

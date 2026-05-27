@@ -1,0 +1,28 @@
+/* Shared auth / welcome CTA buttons — uses theme primary green */
+.authBtnPrimary {
+  color: #000000;
+  background-color: var(--color-primary-main);
+  min-height: 42px;
+  border-radius: 16px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.authBtnPrimary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.authBtnOutlined {
+  color: var(--color-primary-main);
+  background-color: var(--color-background-paper);
+  border: 1.5px solid var(--color-primary-main);
+  min-height: 42px;
+  border-radius: 16px;
+  font-weight: 600;
+  text-transform: none;
+}
+
+.authBtnOutlined:hover {
+  background-color: var(--color-background-light);
+  border-color: var(--color-primary-dark);
+}

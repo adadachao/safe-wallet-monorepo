@@ -76,6 +76,7 @@ export const DataWidget = (): ReactElement => {
               variant="outlined"
               size="small"
               onClick={onImport}
+              className={css.importButton}
               startIcon={<SvgIcon component={ImportIcon} inheritViewBox fontSize="small" />}
               sx={{ width: '100%', py: 0.5, px: 2, mt: 2 }}
             >

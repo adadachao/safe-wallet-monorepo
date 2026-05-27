@@ -39,7 +39,7 @@ const guardRules: GuardRule[] = [
       return !isSiweAuthenticated
     },
     action: ({ isSpacesPath, query }) => {
-      const target = isSpacesPath ? AppRoutes.welcome.spaces : AppRoutes.welcome.index
+      const target = isSpacesPath ? AppRoutes.welcome.spaces : AppRoutes.welcome.accounts
       const safe = typeof query.safe === 'string' ? query.safe : undefined
       return redirect(safe ? `${target}?safe=${encodeURIComponent(safe)}` : target)
     },
@@ -77,7 +77,7 @@ const guardRules: GuardRule[] = [
       const shouldRedirect = isWalletReady && !isPartOfSpaceUrl && !isOnboardingRoute && !isPublicRoute
       return shouldRedirect
     },
-    action: () => redirect(AppRoutes.welcome.index),
+    action: () => redirect(AppRoutes.welcome.accounts),
   },
 ]
 

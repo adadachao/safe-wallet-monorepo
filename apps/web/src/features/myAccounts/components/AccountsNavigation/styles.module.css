@@ -29,7 +29,7 @@
 
 .active {
   color: var(--color-text-primary);
-  background: var(--color-background-secondary);
+  background: var(--color-background-light);
 }
 
 .label {
