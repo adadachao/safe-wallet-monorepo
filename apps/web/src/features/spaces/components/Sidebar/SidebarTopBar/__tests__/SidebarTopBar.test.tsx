@@ -2,12 +2,6 @@ import { render, screen } from '@testing-library/react'
 import { SidebarTopBar } from '../SidebarTopBar'
 import { AppRoutes } from '@/config/routes'
 
-const mockUseRouter = jest.fn()
-
-jest.mock('next/router', () => ({
-  useRouter: () => mockUseRouter(),
-}))
-
 jest.mock('@/components/ui/sidebar', () => ({
   SidebarTrigger: ({ className, 'data-testid': testId }: { className?: string; 'data-testid'?: string }) => (
     <button data-testid={testId} className={className}>
@@ -28,11 +22,6 @@ jest.mock('@/components/common/SafeLogo', () => {
 })
 
 describe('SidebarTopBar', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-    mockUseRouter.mockReturnValue({ pathname: AppRoutes.welcome.accounts })
-  })
-
   it('renders all required elements', () => {
     render(<SidebarTopBar />)
 
@@ -63,17 +52,7 @@ describe('SidebarTopBar', () => {
     expect(topBar).toHaveClass('min-h-16')
   })
 
-  it('passes /welcome href to SafeLogo when on /welcome/accounts', () => {
-    mockUseRouter.mockReturnValue({ pathname: AppRoutes.welcome.accounts })
-
-    render(<SidebarTopBar />)
-
-    expect(screen.getByTestId('logo-container')).toHaveAttribute('href', AppRoutes.welcome.index)
-  })
-
-  it('passes /welcome/accounts href to SafeLogo when not on /welcome/accounts', () => {
-    mockUseRouter.mockReturnValue({ pathname: AppRoutes.welcome.index })
-
+  it('passes /welcome/accounts href to SafeLogo (MOVA)', () => {
     render(<SidebarTopBar />)
 
     expect(screen.getByTestId('logo-container')).toHaveAttribute('href', AppRoutes.welcome.accounts)
