@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FEATURES, hasFeature } from '@safe-global/utils/utils/chains'
 import { useChain } from '@/hooks/useChains'
-import { DEFAULT_CHAIN_ID, IS_TEST_E2E } from '@/config/constants'
+import { DEFAULT_CHAIN_ID, IS_OFFICIAL_HOST, IS_TEST_E2E } from '@/config/constants'
 import { useIsClassicViewOptedIn } from '@/hooks/useClassicView'
 import { useAppSelector } from '@/store'
 import { isAuthenticated } from '@/store/authSlice'
@@ -19,6 +19,9 @@ import { isAuthenticated } from '@/store/authSlice'
  *
  * Cypress runs (IS_TEST_E2E) are forced OFF so the existing smoke / regression
  * suite doesn't have to know about the gate.
+ *
+ * Unofficial hosts (forks such as MOVA, NEXT_PUBLIC_IS_OFFICIAL_HOST=false) keep
+ * the gate OFF so /welcome/accounts remains the wallet-first landing page.
  *
  * The classic-view escape hatch is a signed-out-only override: once a user has
  * opted in via /welcome/spaces, the gate stays OFF for the rest of the tab
@@ -51,6 +54,7 @@ export const useIsRequireLoginEnabled = (): boolean | undefined => {
   const isSignedIn = useAppSelector(isAuthenticated)
 
   if (IS_TEST_E2E) return false
+  if (!IS_OFFICIAL_HOST) return false
   if (!isMounted) return undefined
   if (isClassicViewOptedIn && !isSignedIn) return false
   if (!chain) return undefined

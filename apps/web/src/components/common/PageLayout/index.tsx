@@ -37,7 +37,7 @@ const STATIC_PAGE_ROUTES = [AppRoutes.terms, AppRoutes.privacy, AppRoutes.licens
 
 const NO_HEADER_ROUTES = [
   AppRoutes.safeLabsTerms,
-  AppRoutes.welcome.accounts,
+  // AppRoutes.welcome.accounts,
   AppRoutes.welcome.createSpace,
   AppRoutes.welcome.selectSafes,
   AppRoutes.welcome.inviteMembers,

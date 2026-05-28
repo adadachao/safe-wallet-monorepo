@@ -7,12 +7,16 @@ import { DEFAULT_CHAIN_ID } from '@/config/constants'
 import type { Chain } from '@safe-global/store/gateway/AUTO_GENERATED/chains'
 
 const mockIsTestE2E = jest.fn(() => false)
+const mockIsOfficialHost = jest.fn(() => true)
 jest.mock('@/config/constants', () => {
   const actual = jest.requireActual('@/config/constants')
   return {
     ...actual,
     get IS_TEST_E2E() {
       return mockIsTestE2E()
+    },
+    get IS_OFFICIAL_HOST() {
+      return mockIsOfficialHost()
     },
   }
 })
@@ -49,6 +53,7 @@ describe('useIsRequireLoginEnabled', () => {
     localStorage.clear()
     setMockChain(undefined)
     mockIsSignedIn = false
+    mockIsOfficialHost.mockReturnValue(true)
   })
 
   afterEach(() => {
@@ -86,6 +91,15 @@ describe('useIsRequireLoginEnabled', () => {
     renderHook(() => useIsRequireLoginEnabled())
 
     expect(mockedUseChain).toHaveBeenCalledWith(String(DEFAULT_CHAIN_ID))
+  })
+
+  it('returns false on unofficial hosts (forks keep /welcome/accounts landing)', () => {
+    setMockChain(mockChain([]))
+    mockIsOfficialHost.mockReturnValue(false)
+
+    const { result } = renderHook(() => useIsRequireLoginEnabled())
+
+    expect(result.current).toBe(false)
   })
 
   it('forces the gate OFF under Cypress (IS_TEST_E2E)', () => {
