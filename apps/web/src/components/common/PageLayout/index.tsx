@@ -6,7 +6,7 @@ import SafeLogo from '@/components/common/SafeLogo'
 import { useIsSpaceRoute } from '@/hooks/useIsSpaceRoute'
 import css from './styles.module.css'
 import SafeLoadingError from '../SafeLoadingError'
-import Footer from '../Footer'
+// import Footer from '../Footer'
 import SideDrawer from './SideDrawer'
 import { useIsSidebarRoute } from '@/hooks/useIsSidebarRoute'
 import { TxModalContext } from '@/components/tx-flow'
@@ -48,7 +48,7 @@ const PageLayout = ({ pathname, children }: { pathname: string; children: ReactE
   const { txFlow, setFullWidth } = useContext(TxModalContext)
   const { BatchSidebar } = useLoadFeature(BatchingFeature)
   const { SelectSafeModal } = useLoadFeature(SpacesFeature)
-  const isSafeLabsTermsPage = pathname === AppRoutes.safeLabsTerms
+  // const isSafeLabsTermsPage = pathname === AppRoutes.safeLabsTerms
   const isStaticPage = STATIC_PAGE_ROUTES.includes(pathname)
   const hideHeader = NO_HEADER_ROUTES.includes(pathname)
   const isOnboardingRoute = ONBOARDING_ROUTES.includes(pathname)
@@ -132,7 +132,7 @@ const PageLayout = ({ pathname, children }: { pathname: string; children: ReactE
 
         <BatchSidebar isOpen={isBatchOpen} onToggle={setBatchOpen} />
 
-        {!isSafeLabsTermsPage && <Footer />}
+        {/* {!isSafeLabsTermsPage && <Footer />} */}
       </div>
 
       <SelectSafeModal />

@@ -11,7 +11,7 @@ import {
   SvgIcon,
   Typography,
 } from '@mui/material'
-import { OpenInNewRounded } from '@mui/icons-material'
+// import { OpenInNewRounded } from '@mui/icons-material'
 import CheckIcon from '@/public/images/common/check.svg'
 import SafeLabsLogo from '@/public/images/logo-safe-labs.svg'
 import css from './styles.module.css'
@@ -235,7 +235,7 @@ const SafeLabsTerms = () => {
               </div>
             </Card>
 
-            <Stack spacing={1} className={css.learnMoreSection}>
+            {/* <Stack spacing={1} className={css.learnMoreSection}>
               <Typography variant="body2" color="text.secondary">
                 Learn more:
               </Typography>
@@ -272,7 +272,7 @@ const SafeLabsTerms = () => {
                   <OpenInNewRounded className={css.externalLinkIcon} />
                 </a>
               </div>
-            </Stack>
+            </Stack> */}
           </Stack>
         </Container>
       </div>
