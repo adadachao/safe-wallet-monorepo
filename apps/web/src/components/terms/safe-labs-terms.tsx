@@ -15,7 +15,7 @@ import {
 import CheckIcon from '@/public/images/common/check.svg'
 import SafeLabsLogo from '@/public/images/logo-safe-labs.svg'
 import css from './styles.module.css'
-import { AppRoutes } from '@/config/routes'
+import { EXTERNAL_PRIVACY_URL, EXTERNAL_TERMS_URL } from '@/config/constants'
 import { useRouter } from 'next/router'
 import { setSafeLabsTermsAccepted } from '@/services/safe-labs-terms'
 import { getSafeRedirectUrl, isValidAutoConnectParam } from '@/services/safe-labs-terms/security'
@@ -115,12 +115,12 @@ const SafeLabsTerms = () => {
 
                 <Typography variant="body2">
                   Please review and accept our{' '}
-                  <Link href={AppRoutes.terms} className={css.linkBold}>
+                  <Link href={EXTERNAL_TERMS_URL} target="_blank" rel="noreferrer noopener" className={css.linkBold}>
                     Terms & Conditions
                   </Link>{' '}
                   to start using your new Safe{'{Wallet}'} by Safe Labs. For information on how we process your personal
                   data, please read our{' '}
-                  <Link href={AppRoutes.privacy} className={css.linkBold}>
+                  <Link href={EXTERNAL_PRIVACY_URL} target="_blank" rel="noreferrer noopener" className={css.linkBold}>
                     Privacy Policy
                   </Link>
                   .
@@ -141,7 +141,12 @@ const SafeLabsTerms = () => {
                           label={
                             <Typography variant="body2">
                               I want to use Safe{'{Wallet}'} by Safe Labs GmbH and have read and accept the{' '}
-                              <Link href={AppRoutes.terms} className={css.linkBold}>
+                              <Link
+                                href={EXTERNAL_TERMS_URL}
+                                target="_blank"
+                                rel="noreferrer noopener"
+                                className={css.linkBold}
+                              >
                                 Terms & Conditions
                               </Link>{' '}
                               governing my use of Safe{'{Wallet}'} by Safe Labs GmbH.
@@ -181,7 +186,7 @@ const SafeLabsTerms = () => {
                 <Typography variant="body2">
                   After the transfer, your personal data will be processed by Safe Labs to provide you your new Safe
                   {'{Wallet}'} experience. For information on how we process your personal data, please read our{' '}
-                  <Link href={AppRoutes.privacy} className={css.linkBold}>
+                  <Link href={EXTERNAL_PRIVACY_URL} target="_blank" rel="noreferrer noopener" className={css.linkBold}>
                     Privacy Policy
                   </Link>
                   .

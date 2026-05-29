@@ -16,7 +16,7 @@ import { useAppDispatch } from '@/store'
 import { openCookieBanner } from '@/store/popupSlice'
 import { CookieAndTermType } from '@/store/cookiesAndTermsSlice'
 import { APP_HOMEPAGE, APP_VERSION } from '@/config/version'
-import { BRAND_NAME } from '@/config/constants'
+import { BRAND_NAME, EXTERNAL_PRIVACY_URL, EXTERNAL_TERMS_URL } from '@/config/constants'
 import { AppRoutes } from '@/config/routes'
 import { HELP_CENTER_URL } from '@safe-global/utils/config/constants'
 import { Button } from '@/components/ui/button'
@@ -41,14 +41,14 @@ const LEGAL_LINKS: LegalLink[] = [
   {
     title: 'Terms & Conditions',
     description: 'For using Safe{Wallet}',
-    href: AppRoutes.terms,
+    href: EXTERNAL_TERMS_URL,
     icon: <FileText className="h-4 w-4 text-muted-foreground" />,
     external: true,
   },
   {
     title: 'Privacy Policy',
     description: 'What we collect and why',
-    href: AppRoutes.privacy,
+    href: EXTERNAL_PRIVACY_URL,
     icon: <Shield className="h-4 w-4 text-muted-foreground" />,
     external: true,
   },

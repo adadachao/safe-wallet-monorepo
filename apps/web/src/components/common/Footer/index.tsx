@@ -10,7 +10,7 @@ import ExternalLink from '../ExternalLink'
 import MUILink from '@mui/material/Link'
 import { useIsOfficialHost } from '@/hooks/useIsOfficialHost'
 import { HELP_CENTER_URL } from '@safe-global/utils/config/constants'
-import { IS_PRODUCTION, COMMIT_HASH } from '@/config/constants'
+import { IS_PRODUCTION, COMMIT_HASH, EXTERNAL_PRIVACY_URL, EXTERNAL_TERMS_URL } from '@/config/constants'
 import type { FooterProps } from './footer.type'
 
 const footerPages = [
@@ -23,12 +23,22 @@ const footerPages = [
 ]
 
 const FooterLink = ({ children, href }: { children: ReactNode; href: string }): ReactElement => {
-  return href ? (
+  if (!href) {
+    return <MUILink>{children}</MUILink>
+  }
+
+  if (href.startsWith('http')) {
+    return (
+      <ExternalLink href={href} noIcon sx={{ span: { textDecoration: 'underline' } }}>
+        {children}
+      </ExternalLink>
+    )
+  }
+
+  return (
     <Link href={href} passHref legacyBehavior>
       <MUILink>{children}</MUILink>
     </Link>
-  ) : (
-    <MUILink>{children}</MUILink>
   )
 }
 
@@ -62,10 +72,10 @@ const Footer: React.FC<FooterProps> = ({
               <Typography variant="caption">&copy;{copyrightYear} Safe Labs GmbH</Typography>
             </li>
             <li>
-              <FooterLink href={getHref(AppRoutes.terms)}>Terms</FooterLink>
+              <FooterLink href={EXTERNAL_TERMS_URL}>Terms</FooterLink>
             </li>
             <li>
-              <FooterLink href={getHref(AppRoutes.privacy)}>Privacy</FooterLink>
+              <FooterLink href={EXTERNAL_PRIVACY_URL}>Privacy</FooterLink>
             </li>
             <li>
               <FooterLink href={getHref(AppRoutes.licenses)}>Licenses</FooterLink>

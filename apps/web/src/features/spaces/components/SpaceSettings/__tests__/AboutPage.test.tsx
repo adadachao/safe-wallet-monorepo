@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { makeStore } from '@/store'
 import AboutPage from '../pages/AboutPage'
+import { EXTERNAL_PRIVACY_URL, EXTERNAL_TERMS_URL } from '@/config/constants'
 import { AppRoutes } from '@/config/routes'
 import { HELP_CENTER_URL } from '@safe-global/utils/config/constants'
 import { APP_VERSION, APP_HOMEPAGE } from '@/config/version'
@@ -61,13 +62,13 @@ describe('AboutPage', () => {
     it('renders Terms & Conditions with correct href', () => {
       renderWithStore()
       const link = screen.getByRole('link', { name: /Terms & Conditions/i })
-      expect(link).toHaveAttribute('href', AppRoutes.terms)
+      expect(link).toHaveAttribute('href', EXTERNAL_TERMS_URL)
     })
 
     it('renders Privacy Policy with correct href', () => {
       renderWithStore()
       const link = screen.getByRole('link', { name: /Privacy Policy/i })
-      expect(link).toHaveAttribute('href', AppRoutes.privacy)
+      expect(link).toHaveAttribute('href', EXTERNAL_PRIVACY_URL)
     })
 
     it('renders Licenses with correct href', () => {

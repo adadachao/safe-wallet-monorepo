@@ -1,6 +1,5 @@
-import { AppRoutes } from '@/config/routes'
+import { EXTERNAL_TERMS_URL } from '@/config/constants'
 import type { NextPage } from 'next'
-import Link from 'next/link'
 import MUILink from '@mui/material/Link'
 import SafeLogo from '@/components/common/SafeLogo'
 
@@ -14,11 +13,9 @@ const Custom403: NextPage = () => {
       <p>
         We regret to inform you that access to this service is currently unavailable in your region. For further
         information, you may refer to our{' '}
-        <Link href={AppRoutes.terms} passHref legacyBehavior>
-          <MUILink target="_blank" rel="noreferrer">
-            terms
-          </MUILink>
-        </Link>
+        <MUILink href={EXTERNAL_TERMS_URL} target="_blank" rel="noreferrer">
+          terms
+        </MUILink>
         . We apologize for any inconvenience this may cause. Thank you for your understanding.
       </p>
     </main>

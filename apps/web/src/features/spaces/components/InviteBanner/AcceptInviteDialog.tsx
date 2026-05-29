@@ -8,6 +8,7 @@ import { Alert, Box, Button, CircularProgress, DialogActions, DialogContent, Typ
 import { FormProvider, useForm } from 'react-hook-form'
 import ModalDialog from '@/components/common/ModalDialog'
 import NameInput from '@/components/common/NameInput'
+import { EXTERNAL_PRIVACY_URL } from '@/config/constants'
 import { AppRoutes } from '@/config/routes'
 import { useAppDispatch, useAppSelector } from '@/store'
 import { isAuthenticated } from '@/store/authSlice'
@@ -76,7 +77,7 @@ function AcceptInviteDialog({ space, onClose }: { space: GetSpaceResponse; onClo
               <NameInput data-testid="invite-name-input" label="Name" autoFocus name="name" required />
             </Box>
             <Typography variant="body2" color="text.secondary">
-              How is my data processed? Read our <ExternalLink href={AppRoutes.privacy}>privacy policy</ExternalLink>
+              How is my data processed? Read our <ExternalLink href={EXTERNAL_PRIVACY_URL}>privacy policy</ExternalLink>
             </Typography>
 
             {error && (

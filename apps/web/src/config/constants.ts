@@ -14,6 +14,9 @@ export const IS_DEV = APP_ENV === 'development'
 export const IS_TEST_E2E = APP_ENV === 'cypress' || process.env.NEXT_PUBLIC_IS_TEST_E2E === 'true'
 export const COMMIT_HASH = process.env.NEXT_PUBLIC_COMMIT_HASH || ''
 
+export const EXTERNAL_TERMS_URL = 'https://mova-chain.pages.dev/terms'
+export const EXTERNAL_PRIVACY_URL = 'https://mova-chain.pages.dev/privacy'
+
 // default chain ID's as provided to the environment
 export const DEFAULT_TESTNET_CHAIN_ID = +(process.env.NEXT_PUBLIC_DEFAULT_TESTNET_CHAIN_ID ?? chains.sep)
 export const DEFAULT_MAINNET_CHAIN_ID = +(process.env.NEXT_PUBLIC_DEFAULT_MAINNET_CHAIN_ID ?? chains.eth)

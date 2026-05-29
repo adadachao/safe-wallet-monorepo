@@ -1,5 +1,5 @@
 import ExternalLink from '@/components/common/ExternalLink'
-import { AppRoutes } from '@/config/routes'
+import { EXTERNAL_TERMS_URL } from '@/config/constants'
 import { Typography } from '@mui/material'
 
 import css from './styles.module.css'
@@ -23,14 +23,14 @@ const WidgetDisclaimer = ({ widgetName }: { widgetName: string }) => (
 
       <Typography mb={4}>
         Our{' '}
-        <ExternalLink href={AppRoutes.terms} sx={linkSx}>
+        <ExternalLink href={EXTERNAL_TERMS_URL} sx={linkSx}>
           terms
         </ExternalLink>{' '}
         contain more detailed provisions binding on you relating to such third party content.
       </Typography>
       <Typography>
         By clicking &quot;continue&quot; you re-confirm to have read and understood our{' '}
-        <ExternalLink href={AppRoutes.terms} sx={linkSx}>
+        <ExternalLink href={EXTERNAL_TERMS_URL} sx={linkSx}>
           terms
         </ExternalLink>{' '}
         and this message, and agree to them.

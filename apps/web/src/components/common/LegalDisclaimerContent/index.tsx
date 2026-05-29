@@ -1,5 +1,5 @@
 import ExternalLink from '@/components/common/ExternalLink'
-import { AppRoutes } from '@/config/routes'
+import { EXTERNAL_TERMS_URL } from '@/config/constants'
 import { Typography } from '@mui/material'
 import { type ReactElement } from 'react'
 import css from './styles.module.css'
@@ -31,7 +31,7 @@ const LegalDisclaimerContent = ({
 
       <Typography>
         I have read and understood the{' '}
-        <ExternalLink href={AppRoutes.terms} sx={{ textDecoration: 'none' }}>
+        <ExternalLink href={EXTERNAL_TERMS_URL} sx={{ textDecoration: 'none' }}>
           Terms
         </ExternalLink>{' '}
         and this Disclaimer, and agree to be bound by them.

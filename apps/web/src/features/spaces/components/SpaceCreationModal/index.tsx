@@ -6,6 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import SpaceIcon from '@/public/images/spaces/space.svg'
 import ModalDialog from '@/components/common/ModalDialog'
 import NameInput from '@/components/common/NameInput'
+import { EXTERNAL_PRIVACY_URL } from '@/config/constants'
 import { AppRoutes } from '@/config/routes'
 import { trackEvent } from '@/services/analytics'
 import { SPACE_EVENTS } from '@/services/analytics/events/spaces'
@@ -75,7 +76,7 @@ function SpaceCreationModal({ onClose }: { onClose: () => void }): ReactElement 
               <NameInput data-testid="space-name-input" label="Name" autoFocus name="name" required />
             </Box>
             <Typography variant="body2" color="text.secondary">
-              How is my data processed? Read our <ExternalLink href={AppRoutes.privacy}>privacy policy</ExternalLink>
+              How is my data processed? Read our <ExternalLink href={EXTERNAL_PRIVACY_URL}>privacy policy</ExternalLink>
             </Typography>
 
             {error && (
